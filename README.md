@@ -195,18 +195,6 @@ A cinematic, Apple-inspired interface featuring:
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome!
-Feel free to fork, open issues, or submit PRs.
-
----
-
-## 📜 License
-
-MIT License — Free for educational and research use.
-
----
 
 ## 💡 Built For The Future of Education
 
