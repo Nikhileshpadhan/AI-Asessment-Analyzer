@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.addEventListener('click', (e) => {
         if (e.target.classList.contains('section-delete')) return;
         const id = card.dataset.id;
-        window.location.href = `section-dashboard?id=${id}`;
+        window.location.href = `assignments?section_id=${id}`;
       });
     });
 

@@ -1678,3 +1678,77 @@ a, button, input, .glass-card, .btn {
   transform: scale(1.02);
 }
 
+
+/* --- Public Submission Portal (Dark & White) --- */
+.public-portal {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.public-portal .auth-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+.public-portal .auth-title,
+.public-portal #task-title {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.public-portal .auth-subtitle,
+.public-portal #task-desc,
+.public-portal label {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.public-portal .form-input {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.public-portal .form-input:focus {
+  border-color: #ffffff !important;
+}
+
+.public-portal .drop-zone {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.public-portal .drop-zone:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: #ffffff !important;
+}
+
+.public-portal .file-info-box {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.public-portal #file-name {
+  color: #ffffff !important;
+}
+
+.public-portal .btn-primary {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.public-portal .btn-primary:hover {
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.public-portal #success-content h2 {
+  color: #ffffff;
+}
+
+.public-portal #success-content p {
+  color: rgba(255, 255, 255, 0.6);
+}

@@ -15,6 +15,26 @@ CORS(app)
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
+@app.route('/api/extract-text', methods=['POST'])
+def extract():
+    """Extract text from a file (PDF/DOCX) for reference material."""
+    if 'file' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    try:
+        text = extract_text(file)
+        if not text:
+            return jsonify({"error": "No text extracted"}), 400
+        return jsonify({"text": text})
+    except Exception as e:
+        print(f"Extraction error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route('/api/analyze', methods=['POST'])
 def analyze():
     if 'file' not in request.files:

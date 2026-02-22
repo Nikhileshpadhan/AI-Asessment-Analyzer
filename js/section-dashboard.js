@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const params = new URLSearchParams(window.location.search);
   const sectionId = params.get('id');
+  const assignmentTitle = params.get('assign');
+  const taskId = params.get('task_id');
 
   if (!sectionId) {
     window.location.href = 'sections';
@@ -28,14 +30,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('section-title').textContent = section.name;
   document.getElementById('section-subtitle').textContent =
-    section.description || 'Performance overview for this section';
+    assignmentTitle ? `Assignment: ${assignmentTitle}` : (section.description || 'Performance overview');
 
   // Fetch assignments
-  const { data: assignments } = await sb
+  let query = sb
     .from('assignments')
     .select('*')
-    .eq('section_id', sectionId)
-    .order('analyzed_at', { ascending: false });
+    .eq('section_id', sectionId);
+
+  if (taskId) {
+    query = query.eq('task_id', taskId);
+  } else if (assignmentTitle) {
+    query = query.eq('assignment_title', assignmentTitle);
+  }
+
+  const { data: assignments } = await query.order('analyzed_at', { ascending: false });
 
   if (!assignments || assignments.length === 0) {
     document.getElementById('no-data').style.display = 'block';

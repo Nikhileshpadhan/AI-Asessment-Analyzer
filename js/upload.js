@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loader = document.getElementById('loader-overlay');
   const message = document.getElementById('upload-message');
   const sectionSelect = document.getElementById('section-select');
+  const assignmentTitleInput = document.getElementById('assignment-title');
 
   // Reference answer elements
   const refToggle = document.getElementById('ref-toggle');
@@ -65,6 +66,59 @@ document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const preselect = params.get('section');
     if (preselect) sectionSelect.value = preselect;
+
+    const taskParam = params.get('task');
+    if (taskParam) {
+      const { data: taskData } = await sb
+        .from('assignment_tasks')
+        .select('*')
+        .eq('id', taskParam)
+        .single();
+      
+      if (taskData) {
+        assignmentTitleInput.value = taskData.title;
+        assignmentTitleInput.disabled = true;
+
+        // Apply Rubric Weights
+        if (taskData.rubric_weights) {
+          rubricToggle.checked = true;
+          rubricContentArea.style.display = 'block';
+          rubricTotalBadge.style.display = 'block';
+          
+          document.getElementById('weight-relevance').value = taskData.rubric_weights.relevance || 20;
+          document.getElementById('weight-understanding').value = taskData.rubric_weights.understanding || 30;
+          document.getElementById('weight-logic').value = taskData.rubric_weights.logic || 20;
+          document.getElementById('weight-structure').value = taskData.rubric_weights.structure || 15;
+          document.getElementById('weight-clarity').value = taskData.rubric_weights.clarity || 15;
+          
+          calculateRubricTotal();
+        }
+
+        // Apply Reference Text
+        if (taskData.reference_text) {
+          refToggle.checked = true;
+          refContentArea.style.display = 'block';
+          refModeToggle.style.display = 'flex';
+          
+          // Switch to text mode
+          document.querySelectorAll('.btn-ref-mode').forEach(b => {
+            b.classList.remove('active');
+            b.style.background = 'transparent';
+            b.style.color = 'var(--color-gray-600)';
+          });
+          const textBtn = document.querySelector('.btn-ref-mode[data-mode="text"]');
+          if (textBtn) {
+            textBtn.classList.add('active');
+            textBtn.style.background = 'var(--color-primary)';
+            textBtn.style.color = 'white';
+          }
+          refMode = 'text';
+          refFileContainer.style.display = 'none';
+          refTextContainer.style.display = 'block';
+          refTextInput.value = taskData.reference_text;
+        }
+      }
+    }
   }
 
   await loadSections();
@@ -108,10 +162,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function updateAnalyzeBtn() {
     const isRubricValid = !rubricToggle.checked || rubricTotal === 100;
-    analyzeBtn.disabled = !(selectedFile && sectionSelect.value && isRubricValid);
+    const isTitleValid = assignmentTitleInput.value.trim().length > 0;
+    analyzeBtn.disabled = !(selectedFile && sectionSelect.value && isRubricValid && isTitleValid);
   }
 
   sectionSelect.addEventListener('change', updateAnalyzeBtn);
+  assignmentTitleInput.addEventListener('input', updateAnalyzeBtn);
 
   // --- Rubric Weightage ---
   if (rubricToggle) {
@@ -247,9 +303,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // Save to Supabase
       console.log('⏳ Saving to Supabase...');
+      const params = new URLSearchParams(window.location.search);
+      const taskId = params.get('task');
+
       const insertPayload = {
         section_id: sectionId,
         teacher_id: user.id,
+        task_id: taskId || null,
+        assignment_title: assignmentTitleInput.value.trim() || 'Untitled Assignment',
         student_name: data.name || 'Unknown Student',
         student_id: data.id || '',
         file_name: data.fileName,

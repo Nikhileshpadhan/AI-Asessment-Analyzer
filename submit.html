@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Submit your student assignment for analysis.">
+  <title>Submit Assignment — AnalytixAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="opacity: 0;" class="public-portal">
+  <script>document.body.style.transition = 'opacity 0.4s ease';</script>
+
+  <!-- Loader -->
+  <div id="loader-overlay" class="loader-overlay">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+      <h2 style="margin-top: 24px; color: white;">Analyzing Submission...</h2>
+      <p style="color: rgba(255,255,255,0.7);">This will take a few moments.</p>
+    </div>
+  </div>
+
+  <div class="auth-section" style="padding: 60px 24px;">
+    <div class="glass-card auth-card reveal-up" style="max-width: 500px; padding: 40px;">
+      
+      <div id="submission-content">
+        <div class="auth-header" style="text-align: center;">
+          <div class="logo" style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 24px; letter-spacing: -0.03em;">
+            Analytix<span>AI</span>
+          </div>
+          <h1 class="auth-title" id="task-title">Assignment Submission</h1>
+          <p class="auth-subtitle" id="task-desc">Please enter your details and upload your assignment file.</p>
+        </div>
+
+        <div class="message" id="submit-message"></div>
+
+        <div class="form-group">
+          <label for="student-name" style="font-weight: 700;">Full Name</label>
+          <input type="text" id="student-name" class="form-input" placeholder="e.g. John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="student-id" style="font-weight: 700;">Student ID (Optional)</label>
+          <input type="text" id="student-id" class="form-input" placeholder="e.g. STU-12345">
+        </div>
+
+        <div style="margin-top: 24px; margin-bottom: 32px;">
+          <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 12px;">Upload Assignment (PDF or DOCX)</h3>
+          <div class="drop-zone" id="drop-zone">
+            Click or drag your assignment here
+            <input type="file" id="file-input" hidden accept=".pdf,.docx">
+          </div>
+          
+          <div id="file-info" class="file-info-box" style="display: none; margin-top: 12px; padding: 12px; background: rgba(99, 102, 241, 0.05); border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.1); align-items: center; gap: 12px;">
+            <div style="font-size: 1.5rem;">📄</div>
+            <div style="flex: 1;">
+              <div id="file-name" style="font-weight: 600; font-size: 0.9rem; color: var(--color-gray-900);"></div>
+              <div id="file-size" style="font-size: 0.75rem; color: var(--color-gray-500);"></div>
+            </div>
+            <button id="file-remove" style="background: none; border: none; color: #ef4444; font-size: 0.8rem; font-weight: 600; cursor: pointer;">Remove</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg" id="submit-btn" style="width: 100%;" disabled>Submit Assignment</button>
+      </div>
+
+      <!-- Success State -->
+      <div id="success-content" style="display: none; text-align: center; padding: 40px 0;">
+        <div style="font-size: 4rem; margin-bottom: 24px;">✅</div>
+        <h2 style="font-size: 1.5rem; margin-bottom: 12px;">Submission Received!</h2>
+        <p style="color: var(--color-gray-500); margin-bottom: 32px;">Your assignment has been successfully analyzed and submitted to your teacher.</p>
+        <button class="btn btn-secondary" onclick="window.location.reload()" style="width: 100%;">Submit Another File</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/config.js?v=2"></script>
+  <script src="js/submit.js?v=2"></script>
+  <script src="js/animations.js?v=2"></script>
+</body>
+</html>

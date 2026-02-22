@@ -63,7 +63,8 @@ def perform_vision_ocr(pdf_bytes):
                             {
                                 "type": "image_url",
                                 "image_url": {
-                                    "url": f"data:image/png;base64,{base64_image}"
+                                    "url":
+                                    f"data:image/png;base64,{base64_image}"
                                 }
                             }
                         ]
@@ -90,18 +91,21 @@ def analyze_assignment(text, reference_text=None, weights=None):
     if reference_text:
         ref_instruction = f"""
         ================================================
-        REFERENCE ANSWER COMPARISON (PRIORITY)
+        TEACHER'S REFERENCE CONTEXT (GROUND TRUTH)
         ================================================
-        The teacher has provided a REFERENCE ANSWER below.
-        You MUST use this as the absolute ground truth.
+        The teacher has provided the following REFERENCE MATERIAL.
+        This is the absolute ground truth for facts, expected answers,
+        and grading context. This material is NOT part of the
+        student's submission.
 
         REFERENCE CONTENT:
         {truncated_ref}
 
-        Rules:
-        1. If relevant, score high (85+) for matching baseline.
-        2. Be strict if student contradicts the reference.
-        3. Mention the reference comparison in feedback.
+        Rules for Reference:
+        1. This content is EXEMPT from "Assignment Detection" rules.
+        2. Treat this as the master context for evaluating the student.
+        3. Be strict if student contradicts this ground truth.
+        4. Mention specific reference points in your feedback.
         """
 
     # Rubric Weightage Instruction
@@ -149,9 +153,14 @@ def analyze_assignment(text, reference_text=None, weights=None):
     {weight_instr}
 
     ================================================
-    STEP 1 — ASSIGNMENT DETECTION
+    STEP 1 — STUDENT ASSIGNMENT DETECTION
     ================================================
-    Before scoring, determine whether the document is a student assignment.
+    First, verify if the "Assignment text" (the student's work) is
+    actually a student assignment.
+
+    Note: The "TEACHER'S REFERENCE CONTEXT" (if present) is NOT the
+    student's work; it is the grading key and MUST NOT be used to
+    decide if the submission is an assignment.
 
     A document IS an assignment if:
     - It contains questions and answers OR structured responses
