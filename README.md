@@ -1,118 +1,88 @@
 # AnalytixAI — Intelligent Assignment Evaluation Engine
 
-**AnalytixAI** is a premium, AI-powered educational analytics platform designed to bridge the gap between traditional grading and the modern, AI-augmented classroom. It empowers educators with high-precision, multi-dimensional analysis of student assignments, reducing manual grading time by up to **30%** while eliminating evaluation bias.
+AnalytixAI is a premium, AI-powered educational analytics platform built to streamline the grading process in the modern classroom. It leverages high-precision Large Language Models (LLMs) and Vision-OCR to provide multi-dimensional analysis of student work, significantly reducing manual effort while maintaining objective evaluation standards.
 
 ---
 
 ## 🚀 The Vision
 
-In an era where AI-generated content is becoming ubiquitous, educators need smarter tools to evaluate student work fairly. AnalytixAI doesn't just grade — it understands.
-
-By leveraging Large Language Models (LLMs) and Vision-OCR, the platform delivers deep insights into student understanding, reasoning, and clarity — respecting both the teacher’s time and the student’s effort.
+As AI-generated content becomes more common, educators need tools that do more than just assign a grade. AnalytixAI bridges this gap by analyzing the depth of a student’s understanding, logic, and clarity. It is designed to respect the educator's time by providing instant, actionable intelligence for both digital and handwritten submissions.
 
 ---
 
 ## ✨ Core Features
 
-### 🧠 Intelligent Instant Analysis
+### 📤 Student-Led Submission Portal
+A public, non-login page where students can upload assignments using a secure link shared by the teacher.
 
-Upload PDF or DOCX assignments and receive comprehensive AI-powered evaluations within seconds.
+### 🧠 Automatic Data Categorization
+Submissions are automatically linked to the correct teacher and section in the database, eliminating manual data entry.
 
-### 👁️ Vision-OCR Hybrid Engine
-
-Automatically detects scanned or handwritten submissions and transcribes them using advanced Vision AI before evaluation.
+### 📝 Vision-OCR Hybrid Engine
+Uses Llama-4 Vision to transcribe and analyze scanned or handwritten assignments.
 
 ### ⚖️ Dynamic Rubric Weighting
+Teachers can customize how Relevance, Understanding, Logic, Structure, and Clarity contribute to the final score.
 
-Customize grading priorities across:
-
-* Relevance
-* Understanding
-* Logic
-* Structure
-* Clarity
-
-### 📌 Reference Grounding
-
-Provide a reference answer to anchor AI evaluation in real marking schemes for maximum accuracy and fairness.
+### 🎯 Reference Grounding
+Evaluation is grounded in a "ground truth" reference answer provided by the teacher for maximum accuracy.
 
 ### 📊 Deep Analytics Dashboard
+Cinematic visualizations including radar charts for competency mapping and bar charts for score distributions.
 
-Cinematic visualizations including:
-
-* Radar charts for competency mapping
-* Score distribution analytics
-* Performance breakdowns
-
-### 🧩 Section-Level Intelligence
-
-Aggregated insights across classes to identify:
-
-* Weak knowledge areas
-* Conceptual gaps
-* Teaching improvement opportunities
+### 🤖 AI Section Insights
+Aggregated class-level feedback that highlights common struggle areas and actionable teaching insights.
 
 ---
 
 ## 🛠️ Technical Architecture
 
-### 🎨 Frontend
-
-* **Stack:** Vanilla HTML5, CSS3 (Apple-style minimalist aesthetic), JavaScript (ES6+)
-* **Charts:** Chart.js for interactive visual analytics
-* **3D Graphics:** Three.js neural particle background
-* **Animations:** Custom Intersection Observer-based reveal system
-
----
-
-### ⚙️ Backend
-
-* **Framework:** Flask (Python) with CORS support
-* **AI Orchestration:**
-
-  * LLM Evaluation Engine for academic reasoning analysis
-  * Vision-OCR for handwritten assignment transcription
-* **Text Extraction:**
-
-  * PyMuPDF (PDF parsing)
-  * docx2txt (DOCX extraction)
+### Frontend
+- **Core:** Vanilla HTML5, CSS3 (Apple-style minimalist aesthetic), JavaScript (ES6+)
+- **Visualizations:** Chart.js for high-performance interactive rendering
+- **Graphics:** Three.js neural particle background
+- **Animations:** Intersection Observer-based smooth transitions
 
 ---
 
-## 🗄️ Database & Authentication
+### Backend
+- **Framework:** Flask (Python) with CORS integration
 
-* **Database:** Supabase (Managed PostgreSQL)
-* **Authentication:** Secure teacher login system
-* **Security:** Row Level Security (RLS) ensures teachers only access their own data
+#### AI Orchestration
+- **LLM:** Llama-3.3-70B via Groq for high-speed academic evaluation
+- **OCR:** Llama-4-Scout-17B Vision for handwritten transcription
+- **Text Processing:** PyMuPDF (fitz) and docx2txt for document parsing
+
+---
+
+### Database & Auth
+- **Supabase:** Managed PostgreSQL for storage and authentication
+- **Security:** Row Level Security (RLS) ensures strict data isolation between teachers
 
 ---
 
 ## 📊 Database Schema
 
-Optimized relational model for education workflows:
+The relational architecture is optimized for educational workflows:
 
 ### `sections`
-
-* Section ID
-* Teacher ID
-* Subject metadata
+- Stores class metadata
+- Includes a unique `share_token` for generating student upload links
 
 ### `assignments`
-
-* Submission records
-* 5-point AI evaluation metrics
-* Per-question feedback
-* Analytics metadata
+- Submission records with:
+  - 5-point evaluation metrics
+  - Student metadata
+  - AI-generated feedback
 
 ---
 
 ## ⚡ Quick Start (Local Setup)
 
 ### 1️⃣ Prerequisites
-
-* Python 3.9+
-* Groq API Key (for AI evaluation)
-* Supabase Project URL & Anon Key
+- Python 3.9+
+- Groq API Key
+- Supabase Project URL & Anon Key
 
 ---
 
@@ -121,83 +91,10 @@ Optimized relational model for education workflows:
 ```bash
 cd backend
 python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
-# Create a .env file and add:
+# Create .env file and add:
 # GROQ_API_KEY=your_key_here
 
 python app.py
-```
-
----
-
-### 3️⃣ Frontend Setup
-
-1. Open `js/config.js`
-2. Add:
-
-   * `SUPABASE_URL`
-   * `SUPABASE_ANON_KEY`
-3. Serve the root directory using:
-
-   * Live Server (VS Code)
-   * Any static server
-
----
-
-## 🏆 Hackathon Highlights
-
-### ✍️ Handwriting Support
-
-Unlike most grading tools, AnalytixAI evaluates physical paper submissions via Vision OCR.
-
-### 🔐 Privacy First
-
-Built with:
-
-* Secure authentication
-* Session guards
-* Strict data isolation
-
-### 🎨 Premium UX
-
-A cinematic, Apple-inspired interface featuring:
-
-* Minimalist design
-* Dark-mode readiness
-* Smooth professional animations
-
----
-
-## 📌 Use Cases
-
-* Schools & coaching institutes
-* Online educators
-* EdTech startups
-* Academic hackathons
-
----
-
-## 🚧 Future Roadmap
-
-* Multi-language evaluation
-* Plagiarism detection layer
-* AI-generated study plans
-* Teacher collaboration dashboards
-* LMS integrations
-
----
-
-
-## 💡 Built For The Future of Education
-
-AnalytixAI is more than a grading tool — it's a step toward **AI-augmented teaching**, where educators focus on mentorship while AI handles repetitive evaluation.
-
-> Empower teachers. Elevate learning. Automate the rest.
