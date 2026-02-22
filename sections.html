@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your class sections and assignment analytics.">
+  <title>My Sections — AnalytixAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="opacity: 0;">
+  <script>document.body.style.transition = 'opacity 0.4s ease';</script>
+
+  <div id="navbar-root"></div>
+
+  <section class="sections-section">
+    <div class="container">
+
+      <div class="sections-header reveal-up">
+        <div>
+          <h1 class="text-headline">My Sections</h1>
+          <p>Organize classes and track student performance</p>
+        </div>
+        <button class="btn btn-primary" id="create-section-btn">+ New Section</button>
+      </div>
+
+      <!-- Empty State -->
+      <div class="no-data" id="sections-empty" style="display:none;">
+        <div class="no-data-icon">📚</div>
+        <h2>No Sections Yet</h2>
+        <p>Create your first class section to start analyzing assignments.</p>
+        <button class="btn btn-primary" id="create-section-btn-2">Create Section</button>
+      </div>
+
+      <!-- Sections Grid -->
+      <div class="sections-grid" id="sections-grid"></div>
+
+    </div>
+  </section>
+
+  <!-- Create Section Modal -->
+  <div class="modal-overlay" id="create-modal">
+    <div class="glass-card modal-card">
+      <h2>Create New Section</h2>
+      <div class="form-group">
+        <label for="section-name">Section Name</label>
+        <input type="text" id="section-name" class="form-input" placeholder="e.g. CS 101 — Spring 2026" required>
+      </div>
+      <div class="form-group">
+        <label for="section-desc">Description (optional)</label>
+        <input type="text" id="section-desc" class="form-input" placeholder="Brief description of this class">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancel-modal">Cancel</button>
+        <button class="btn btn-primary" id="save-section">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-root"></div>
+
+  <script src="js/config.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/components.js?v=2"></script>
+  <script src="js/sections.js?v=2"></script>
+  <script src="js/animations.js?v=2"></script>
+</body>
+</html>

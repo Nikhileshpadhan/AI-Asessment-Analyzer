@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View all past assignment analyses with scores, plagiarism data, and detailed reports.">
+  <title>Past Records — AnalytixAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="opacity: 0;">
+  <script>document.body.style.transition = 'opacity 0.4s ease';</script>
+
+  <div id="navbar-root"></div>
+
+  <section class="records-section">
+    <div class="container">
+
+      <div class="records-header reveal">
+        <h1 class="text-headline">Past Records</h1>
+        <p>All previously analyzed assignments are stored locally.</p>
+      </div>
+
+      <!-- Empty State -->
+      <div class="no-data" id="records-empty" style="display:none;">
+        <div class="no-data-icon">📁</div>
+        <h2>No Records Found</h2>
+        <p>Analyze your first assignment to see records here.</p>
+        <a href="start" class="btn btn-primary">Start Analyzing</a>
+      </div>
+
+      <!-- Table -->
+      <div class="records-table-wrapper reveal">
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Understanding</th>
+              <th>Overall Score</th>
+              <th>Report</th>
+            </tr>
+          </thead>
+          <tbody id="records-tbody"></tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:24px;" class="reveal">
+        <button class="btn btn-ghost btn-sm" id="clear-records" style="display:none; color:#991b1b;">Clear All Records</button>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-root"></div>
+
+  <script src="js/config.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/components.js?v=2"></script>
+  <script src="js/records.js?v=2"></script>
+  <script src="js/animations.js?v=2"></script>
+</body>
+</html>

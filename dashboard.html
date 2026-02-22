@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View detailed assignment analytics with interactive charts, skill breakdowns, and AI feedback.">
+  <title>Dashboard — AnalytixAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="opacity: 0;">
+  <script>document.body.style.transition = 'opacity 0.4s ease';</script>
+
+  <div id="navbar-root"></div>
+
+  <!-- No Data State -->
+  <div class="no-data" id="no-data" style="display:none; padding-top:140px;">
+    <div class="no-data-icon">📊</div>
+    <h2>No Analysis Yet</h2>
+    <p>Upload and analyze an assignment to see your dashboard.</p>
+    <a href="start" class="btn btn-primary">Start Analyzing</a>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div id="dashboard-content" style="display:none;">
+    <section class="dashboard-section">
+      <div class="container">
+
+        <!-- Header -->
+        <div class="dashboard-header reveal-up">
+          <h1 class="text-headline">Analysis Dashboard</h1>
+          <p>Student: <strong id="dash-student"></strong> · File: <span id="dash-file"></span> · <span id="dash-date"></span></p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-grid reveal-up" data-stagger>
+          <div class="glass-card summary-card reveal-up reveal-delay-1">
+            <div class="card-label">Relevance</div>
+            <div class="card-value" id="card-relevance">—</div>
+            <div class="card-sub">Topic alignment</div>
+          </div>
+          <div class="glass-card summary-card reveal-up reveal-delay-2">
+            <div class="card-label">Understanding</div>
+            <div class="card-value" id="card-understanding">—</div>
+            <div class="card-sub">Knowledge depth</div>
+          </div>
+          <div class="glass-card summary-card reveal-up reveal-delay-3">
+            <div class="card-label">Overall Score</div>
+            <div class="card-value" id="card-overall">—</div>
+            <div class="card-sub">Combined assessment</div>
+          </div>
+          <div class="glass-card summary-card reveal-up reveal-delay-4">
+            <div class="card-label">Questions Solved</div>
+            <div class="card-value" id="card-questions">—</div>
+            <div class="card-sub">Correct answers detected</div>
+          </div>
+          <div class="glass-card summary-card reveal-up reveal-delay-5">
+            <div class="card-label">Clarity</div>
+            <div class="card-value" id="card-clarity">—</div>
+            <div class="card-sub">Writing quality</div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid reveal-up">
+          <div class="glass-card chart-card">
+            <h3>Academic Competency</h3>
+            <canvas id="radar-chart"></canvas>
+          </div>
+          <div class="glass-card chart-card">
+            <h3>Structure & Logic</h3>
+            <canvas id="bar-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Per-Question Feedback -->
+        <div id="per-question-container" class="glass-card reveal-up" style="padding:32px; margin-bottom:24px; display:none;">
+          <h3 style="font-size:1rem; font-weight:700; margin-bottom:16px;">Question-Level Feedback</h3>
+          <div id="per-question-list" style="display:flex; flex-direction:column; gap:12px;">
+            <!-- Iteratively filled -->
+          </div>
+        </div>
+
+        <!-- Overall Feedback -->
+        <div class="glass-card reveal-up" style="padding:32px; margin-bottom:40px;">
+          <h3 style="font-size:1rem; font-weight:700; margin-bottom:12px;">Overall AI Feedback</h3>
+          <p id="dash-feedback" style="font-size:0.92rem; line-height:1.7; color:var(--color-gray-600);"></p>
+        </div>
+
+        <!-- Actions -->
+        <div class="reveal-up" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="start" class="btn btn-primary">New Analysis</a>
+          <a href="records" class="btn btn-secondary">Past Records</a>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <div id="footer-root"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="js/config.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/components.js?v=2"></script>
+  <script src="js/dashboard.js?v=2"></script>
+  <script src="js/animations.js?v=2"></script>
+</body>
+</html>

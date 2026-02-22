@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your AnalytixAI teacher account.">
+  <title>Sign Up — AnalytixAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="opacity: 0;">
+  <script>document.body.style.transition = 'opacity 0.4s ease';</script>
+
+  <div id="navbar-root"></div>
+
+  <section class="auth-section">
+    <div class="glass-card auth-card reveal-up">
+      <div class="auth-header">
+        <h1 class="auth-title">Create Account</h1>
+        <p class="auth-subtitle">Start analyzing assignments with AI</p>
+      </div>
+
+      <div class="message" id="auth-message"></div>
+
+      <form id="signup-form" autocomplete="on">
+        <div class="form-group">
+          <label for="display-name">Your Name</label>
+          <input type="text" id="display-name" class="form-input" placeholder="e.g. Mr. Sharma" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="teacher@school.edu" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Min 6 characters" required minlength="6" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" class="form-input" placeholder="Re-enter password" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" id="signup-btn" style="width:100%; margin-top:8px;">
+          Create Account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Already have an account? <a href="login" class="auth-link">Sign in</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-root"></div>
+
+  <script src="js/config.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/components.js?v=2"></script>
+  <script src="js/animations.js?v=2"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      redirectIfLoggedIn();
+
+      const form = document.getElementById('signup-form');
+      const msg = document.getElementById('auth-message');
+      const btn = document.getElementById('signup-btn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const displayName = document.getElementById('display-name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirm = document.getElementById('confirm-password').value;
+
+        if (password !== confirm) {
+          msg.className = 'message error';
+          msg.textContent = 'Passwords do not match.';
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Creating account...';
+        msg.className = 'message';
+        msg.textContent = '';
+
+        try {
+          await authSignUp(email, password, displayName);
+          msg.className = 'message success';
+          msg.textContent = 'Account created! Check your email to verify, then log in.';
+          btn.textContent = 'Account Created';
+        } catch (err) {
+          msg.className = 'message error';
+          msg.textContent = err.message || 'Signup failed. Please try again.';
+          btn.disabled = false;
+          btn.textContent = 'Create Account';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

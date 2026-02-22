@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AnalytixAI — Intelligent AI-powered assignment analytics for teachers. Instant evaluation, plagiarism detection, and detailed feedback."
+    />
+    <title>AnalytixAI — AI Assignment Analytics for Teachers</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+  <body style="opacity: 0;">
+    <script>document.body.style.transition = 'opacity 0.4s ease';</script>
+    <!-- Navbar -->
+    <div id="navbar-root"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <canvas id="three-canvas"></canvas>
+      <div class="hero-content">
+        <h1 class="text-display reveal-up reveal-delay-1">
+          AI Assignment Analytics<br />for Teachers
+        </h1>
+        <p class="text-body-lg reveal-up reveal-delay-2">
+          Intelligent, instant, and reliable evaluation.<br />
+          Understand every student's work in seconds.
+        </p>
+        <div class="hero-cta-group reveal-up reveal-delay-3">
+          <a href="start" class="btn btn-primary btn-lg"
+            >Start Analyzing</a
+          >
+          <a href="about" class="btn btn-secondary btn-lg">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 64px">
+          <p class="text-caption reveal-down">Why AnalytixAI</p>
+          <h2 class="text-headline reveal-up reveal-delay-1">
+            Built for modern educators
+          </h2>
+        </div>
+        <div class="about-grid" data-stagger>
+          <div class="glass-card-solid about-card reveal-up">
+            <div class="card-icon">⚡</div>
+            <h3>Instant Analysis</h3>
+            <p>
+              Upload any assignment and receive comprehensive AI-powered
+              evaluation within seconds. No waiting, no manual grading.
+            </p>
+          </div>
+          <div class="glass-card-solid about-card reveal-up reveal-delay-1">
+            <div class="card-icon">🔍</div>
+            <h3>Plagiarism Detection</h3>
+            <p>
+              Advanced similarity checking that identifies copied content and
+              AI-generated text with precision scoring.
+            </p>
+          </div>
+          <div class="glass-card-solid about-card reveal-up reveal-delay-2">
+            <div class="card-icon">📊</div>
+            <h3>Detailed Dashboard</h3>
+            <p>
+              Beautiful analytics with radar charts, accuracy breakdowns, and
+              actionable insights for every student submission.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-sm" style="background: var(--color-gray-50)">
+      <div class="container text-center">
+        <h2 class="text-title reveal-up" style="margin-bottom: 16px">
+          Ready to transform your workflow?
+        </h2>
+        <p class="text-body reveal-up reveal-delay-1" style="margin-bottom: 32px">
+          Join educators who evaluate smarter, not harder.
+        </p>
+        <a href="start" class="btn btn-primary reveal-up reveal-delay-2"
+          >Get Started Free</a
+        >
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-root"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/config.js?v=2"></script>
+    <script src="js/auth.js?v=2"></script>
+    <script src="js/components.js?v=2"></script>
+    <script src="js/three-bg.js?v=2"></script>
+    <script src="js/animations.js?v=2"></script>
+  </body>
+</html>

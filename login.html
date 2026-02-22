@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to your AnalytixAI teacher account.">
+  <title>Login — AnalytixAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="opacity: 0;">
+  <script>document.body.style.transition = 'opacity 0.4s ease';</script>
+
+  <div id="navbar-root"></div>
+
+  <section class="auth-section">
+    <div class="glass-card auth-card reveal-up">
+      <div class="auth-header">
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to your teacher account</p>
+      </div>
+
+      <div class="message" id="auth-message"></div>
+
+      <form id="login-form" autocomplete="on">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="teacher@school.edu" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" id="login-btn" style="width:100%; margin-top:8px;">
+          Sign In
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="signup" class="auth-link">Create one</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-root"></div>
+
+  <script src="js/config.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/components.js?v=2"></script>
+  <script src="js/animations.js?v=2"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      redirectIfLoggedIn();
+
+      const form = document.getElementById('login-form');
+      const msg = document.getElementById('auth-message');
+      const btn = document.getElementById('login-btn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        btn.disabled = true;
+        btn.textContent = 'Signing in...';
+        msg.className = 'message';
+        msg.textContent = '';
+
+        try {
+          await authSignIn(email, password);
+          msg.className = 'message success';
+          msg.textContent = 'Login successful! Redirecting...';
+          setTimeout(() => window.location.href = 'sections.html', 800);
+        } catch (err) {
+          msg.className = 'message error';
+          msg.textContent = err.message || 'Login failed. Please try again.';
+          btn.disabled = false;
+          btn.textContent = 'Sign In';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
